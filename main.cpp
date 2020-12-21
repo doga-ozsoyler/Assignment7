@@ -17,13 +17,9 @@ int main(){
     list.insert(58);
     list.insert(82);
     list.insert(79);
-    //list.insert(90);
+    list.insert(90);
 
-    for(int i = 0; i < list.data.size(); i++)
-    {
-        cout << i << "\t" << list.data[i].key << "\t" << list.data[i].plink << endl;
-    }
-
+    cout << list;
 
     return 0;
 }

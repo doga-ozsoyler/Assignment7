@@ -92,12 +92,17 @@ int ComputedChaining::remove(int pos) {
     int address = pos;
     int oldAddress = address;
     vector<int> removeData;
-    while(data[address].plink != -1)
+    while (data[address].plink != -1 || removeData.size() == 0)
     {
-        cout << "in while" << endl;
         removeData.push_back(data[address].key);
-        data[address].valid = false;
         address = h1(address + h2(data[address].key) * data[address].plink);
+        if(h1(removeData[0]) != h1(removeData.back()))
+        {
+            removeData.pop_back();
+            oldAddress = address;
+            continue;
+        }
+        data[oldAddress].valid = false;
         data[oldAddress].plink = -1;
         oldAddress = address;
     }
@@ -105,9 +110,8 @@ int ComputedChaining::remove(int pos) {
     data[pos].valid = true;
 
 	for(int i = 0; i < removeData.size(); i++)
-    {    
-		insert(removeData[i]);
-        cout << "insert" << endl;
+    {   
+        insert(removeData[i]);
 	}
 
     removeData.clear();
