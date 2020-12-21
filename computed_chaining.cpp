@@ -63,12 +63,14 @@ void ComputedChaining::insert(int key) {
                 data[address].plink = plink;
                 data[newAddress].key = key;
                 data[newAddress].valid = true;
+                data[newAddress].plink = -1;
             }
         }
         else
         {
-            
-
+            remove(mod);
+            data[mod].key = key;
+            data[mod].plink = -1;
         }
         
     }
@@ -76,13 +78,23 @@ void ComputedChaining::insert(int key) {
 }
 
 
-/*int ComputedChaining::remove(int pos) {
+int ComputedChaining::remove(int pos) {
+
+    int next = h1(data[pos].key);
+    int prev = next;
+    while (data[next].key != data[pos].key)
+    {
+        prev = next;
+        next = h1(next + h2(data[next].key) * data[next].plink);
+    }
+    data[prev].plink = -1;
 
     int address = pos;
     int oldAddress = address;
     vector<int> removeData;
     while(data[address].plink != -1)
     {
+        cout << "in while" << endl;
         removeData.push_back(data[address].key);
         data[address].valid = false;
         address = h1(address + h2(data[address].key) * data[address].plink);
@@ -95,7 +107,10 @@ void ComputedChaining::insert(int key) {
 	for(int i = 0; i < removeData.size(); i++)
     {    
 		insert(removeData[i]);
+        cout << "insert" << endl;
 	}
 
     removeData.clear();
-}*/
+
+    return 1;
+}
