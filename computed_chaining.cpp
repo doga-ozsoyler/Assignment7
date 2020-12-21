@@ -67,19 +67,7 @@ void ComputedChaining::insert(int key) {
         }
         else
         {
-            int address = mod;
-            int oldAddress = address;
-            vector<int> removeData;
-            while(data[address].plink != -1)
-            {
-                removeData.push_back(data[address].key);
-                data[address].valid = false;
-                address = h1(address + h2(data[address].key) * data[address].plink);
-                data[oldAddress].plink = -1;
-                oldAddress = address;
-            }
-
-            while(removeData )
+            
 
         }
         
@@ -88,7 +76,26 @@ void ComputedChaining::insert(int key) {
 }
 
 
-int ComputedChaining::remove(int pos) {
+/*int ComputedChaining::remove(int pos) {
 
+    int address = pos;
+    int oldAddress = address;
+    vector<int> removeData;
+    while(data[address].plink != -1)
+    {
+        removeData.push_back(data[address].key);
+        data[address].valid = false;
+        address = h1(address + h2(data[address].key) * data[address].plink);
+        data[oldAddress].plink = -1;
+        oldAddress = address;
+    }
 
-}
+    data[pos].valid = true;
+
+	for(int i = 0; i < removeData.size(); i++)
+    {    
+		insert(removeData[i]);
+	}
+
+    removeData.clear();
+}*/

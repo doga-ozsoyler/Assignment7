@@ -7,6 +7,7 @@ int main(){
 
     ComputedChaining list(11);
 
+    list.insert(41);
 
 
     return 0;
